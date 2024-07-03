@@ -1,0 +1,28 @@
+
+<h1>Hello</h1>
+    <label for="city" name="city">City:</label>
+    <input id ="city" placeholder="Enter city name" type="text" #city>
+    <button 
+        #city
+        for='city' 
+        (click)='getWeather(city.value)'    
+    >
+        Search
+    </button>
+    <h4>{{data['current_weather']['city']}}</h4>
+    <h4>{{data['current_weather']['temperature']}}C</h4>
+    <h4>{{data['current_weather']['humidity']}}</h4>
+    <h4>{{data['current_weather']['wind_speed']}}km/h</h4>
+    <h4>{{data['current_weather']['precipitation']}}</h4>
+    <h4>{{data['current_weather']['is_day']}}</h4>
+
+
+
+<!-- "current_weather": {
+    "city": str(city),
+    "temperature": weather_resp['current']['temperature_2m'],
+    "humidity": weather_resp['current']['relative_humidity_2m'],
+    "wind_speed": weather_resp['current']['wind_speed_10m'],
+    "precipitation": weather_resp['current']['precipitation'],
+    "is_day": weather_resp['current']['is_day']
+}, -->
