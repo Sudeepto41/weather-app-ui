@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { PolutantComponent } from '../polutant/polutant.component';
+import { RouterOutlet } from '@angular/router';
+
 
 
 @Component({
   selector: 'app-current-weather',
   standalone: true,
-  imports: [],
+  imports: [PolutantComponent,],
   templateUrl: './current-weather.component.html',
   styleUrl: './current-weather.component.css'
 })
@@ -19,7 +22,6 @@ export class CurrentWeatherComponent {
       this.getWeather("mumbai")
     }
     public getWeather(city: string){
-      console.log(event)
       this.httpClient.get(this.baseUrl, { params: new HttpParams().set('city', city) }).subscribe(
         (resp: any)=>{
           console.log(resp)

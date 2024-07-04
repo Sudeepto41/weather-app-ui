@@ -1,28 +1,216 @@
 
-<h1>Hello</h1>
-    <label for="city" name="city">City:</label>
-    <input id ="city" placeholder="Enter city name" type="text" #city>
-    <button 
-        #city
-        for='city' 
-        (click)='getWeather(city.value)'    
-    >
-        Search
-    </button>
-    <h4>{{data['current_weather']['city']}}</h4>
-    <h4>{{data['current_weather']['temperature']}}C</h4>
-    <h4>{{data['current_weather']['humidity']}}</h4>
-    <h4>{{data['current_weather']['wind_speed']}}km/h</h4>
-    <h4>{{data['current_weather']['precipitation']}}</h4>
-    <h4>{{data['current_weather']['is_day']}}</h4>
+<div  id="app-container">
+    <div class="weather">
+        <div class="left-panel">
+            <div id="city-input-group" class="input-group mb-3">
+                <input id ="city" placeholder="Search for cities" type="text" #city>
+                <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    #city
+                    for='city' 
+                    (click)='getWeather(city.value)'    
+                >
+                    Search
+                </button>
+            </div>
+            <div class="left-data">
+                    <h1>{{data['current_weather']['temperature']}}&deg;C</h1>
+                    <h4>{{data['current_weather']['city']}}</h4>
+                <div class="other">
+                    <div class="card" style="width: 18rem; align-items: center;">
+                        <div class="card-body" style="align-items: center;">
+                            Humidity: <h4>{{data['current_weather']['humidity']}}</h4>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem; align-items: center;">
+                        <div class="card-body">
+                            Wind_speed <h4>{{data['current_weather']['wind_speed']}}km/h</h4>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem; align-items: center;">
+                        <div class="card-body">
+                            Precipitaion <h4>{{data['current_weather']['precipitation']}} mm</h4>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem; align-items: center;">
+                        <div class="card-body">
+                            <h5>Currently {{data['current_weather']['is_day']}} in {{data['current_weather']['city']}}</h5>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <div class="right-panel">
+            <div class="top-forecast">
+                <div class="forecast-container">
+                    <h3 style="flex: 1; margin-top: 2%;">Forecast:</h3>
+                    <div class="forecast-row">
+                        <div class="historic">
+                            <h5 style="flex: 1; margin-top: 2%;">Historic:</h5>
+                            <div class="wrapper">
+                                <div class="forecast">
+                                    {{data['past'][0]['date']}}
+                                    <h4>Min:{{data['past'][0]['temp_min']}}</h4>
+                                    <h4>Max: {{data['past'][0]['temp_max']}}</h4>
+                                </div>
+                                <div class="forecast">
+                                    {{data['past'][1]['date']}}
+                                    <h4>Min: {{data['past'][1]['temp_min']}}</h4>
+                                    <h4>Max: {{data['past'][1]['temp_max']}}</h4>
+                                </div>
+                                <div class="forecast">
+                                    {{data['past'][2]['date']}}
+                                    <h4>Min: {{data['past'][2]['temp_min']}}</h4>
+                                    <h4>Max: {{data['past'][2]['temp_max']}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="forecasted">
+                            <h5 style="flex: 1; margin-top: 2%;">Forecasted:</h5>
+                            <div class="wrapper">
+                                <div class="forecast">
+                                    {{data['future'][0]['date']}}
+                                    <h4>Min: {{data['future'][0]['temp_min']}}</h4>
+                                    <h4>Max: {{data['future'][0]['temp_max']}}</h4>
+                                </div>
+                                <div class="forecast">
+                                    {{data['future'][1]['date']}}
+                                    <h4>Min: {{data['future'][1]['temp_min']}}</h4>
+                                    <h4>Max: {{data['future'][1]['temp_max']}}</h4>
+                                </div>
+                                <div class="forecast">
+                                    {{data['future'][2]['date']}}
+                                    <h4>Min: {{data['future'][2]['temp_min']}}</h4>
+                                    <h4>Max: {{data['future'][2]['temp_max']}}</h4>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="bottom-aqi">
+                <div class="aqi" >
+                    <div class="card" style="width:30%; align-items: center;">
+                        <div class="card-body">
+                            <h2>
+                                AQI: {{data['air_quality']['aqi']}}
+                            </h2>
+                            <span id="measure"class="badge text-bg-secondary">
+                                <h6>{{data['air_quality']['aqi_measure']}}</h6>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pollutant">
+                    <div id="pollutant" class="card" style="width:30%; align-items: center;">
+                        <div class="card-body">
+                            <h5>CO</h5>
+                            <h3>
+                                {{data['air_quality']['co']}} 
+                            </h3>
+                            <h6>
+                                μg/m3
+                            </h6>
+                        </div>
+                    </div>
+                    <div id="pollutant" class="card" style="width:30%; align-items: center;">
+                        <div class="card-body">
+                            <h5>NO</h5>
+                            <h3>
+                                {{data['air_quality']['no']}} 
+                            </h3>
+                            <h6>
+                                μg/m3
+                            </h6>
+                        </div>
+                    </div>
+                    <div id="pollutant" class="card" style="width:30%; align-items: center;">
+                        <div class="card-body">
+                            <h5>NO2</h5>
+                            <h3>
+                                {{data['air_quality']['no2']}} 
+                            </h3>
+                            <h6>
+                                μg/m3
+                            </h6>
+                        </div>
+                    </div>
+                    <div id="pollutant" class="card" style="width:30%; align-items: center;">
+                        <div class="card-body">
+                            <h5>O3</h5>
+                            <h3>
+                                {{data['air_quality']['o3']}} 
+                            </h3>
+                            <h6>
+                                μg/m3
+                            </h6>
+                        </div>
+                    </div>
+                    <div id="pollutant" class="card" style="width:30%; align-items: center;">
+                        <div class="card-body">
+                            <h5>S02</h5>
+                            <h3>
+                                {{data['air_quality']['so2']}} 
+                            </h3>
+                            <h6>
+                                μg/m3
+                            </h6>
+                        </div>
+                    </div>
+                    <div id="pollutant" class="card" style="width:30%; align-items: center;">
+                        <div class="card-body">
+                            <h5>PM 2.5</h5>
+                            <h3>
+                                {{data['air_quality']['pm2_5']}} 
+                            </h3>
+                            <h6>
+                                μg/m3
+                            </h6>
+                        </div>
+                    </div>
+                    <div id="pollutant" class="card" style="width:30%; align-items: center;">
+                        <div class="card-body">
+                            <h5>PM 10</h5>
+                            <h3>
+                                {{data['air_quality']['pm10']}} 
+                            </h3>
+                            <h6>
+                                μg/m3
+                            </h6>
+                        </div>
+                    </div>
+                    <div id="pollutant" class="card" style="width:30%; align-items: center;">
+                        <div class="card-body">
+                            <h5>NH3</h5>
+                            <h3>
+                                {{data['air_quality']['nh3']}} 
+                            </h3>
+                            <h6>
+                                μg/m3
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-
-
-<!-- "current_weather": {
-    "city": str(city),
-    "temperature": weather_resp['current']['temperature_2m'],
-    "humidity": weather_resp['current']['relative_humidity_2m'],
-    "wind_speed": weather_resp['current']['wind_speed_10m'],
-    "precipitation": weather_resp['current']['precipitation'],
-    "is_day": weather_resp['current']['is_day']
-}, -->
+        </div>
+        
+    </div>
+    
+    
+</div>
+<!-- air_quality: {
+    aqi: 1,
+    co: 307.08,
+    no: 0.03,
+    no2: 9.43,
+    o3: 24.32,
+    so2: 9.54,
+    pm2_5: 9.96,
+    pm10: 16.01,
+    nh3: 1.93
+  } -->
